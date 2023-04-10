@@ -145,8 +145,9 @@ table.data td {
 	padding-bottom: 5px;
 	vertical-align: top;
 }
-tbody {
-	width: 50%;
+tr {
+  box-sizing: border-box;
+  width: 50%;
 }
 code {
   font-family: Consolas,"courier new";
