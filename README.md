@@ -1,2 +1,2 @@
-# pnp-diffusion-github-io
-Plug-and-Play Diffusion features.
+# seer-diffusion-github-io
+Seer: Language Instructed Video Prediction with Latent Diffusion Models.
