@@ -112,7 +112,7 @@ table#video {
 }
 
 .caption {
-	font-style: italic;
+	/*font-style: italic;*/
 	font-size: 100%;
 }
 
@@ -126,7 +126,7 @@ table#video {
 }
 
 .section{
-	font-size: 140%;
+	font-size: 200%;
 	font-weight: 500;
 }
 
@@ -145,10 +145,7 @@ table.data td {
 	padding-bottom: 5px;
 	vertical-align: top;
 }
-tr {
-  box-sizing: border-box;
-  width: 50%;
-}
+
 code {
   font-family: Consolas,"courier new";
   color: crimson;
@@ -168,11 +165,11 @@ code {
  .carousel-item {
  /* height: 234px; */
  overflow: hidden;
- /* width: 100%; */
+ width: 50%;
  text-align: center;
  }
  .carousel-item img {
- /* width: 100%; */
+	width: 50%;
  }
  .carousel-inner .item img {
  margin:auto;
@@ -234,7 +231,7 @@ code {
 
  .caption-active {
     color: black;
-	background-color: #F2E34C;
+	background-color: #4c78f2;
  }
 
  #videoCarousel{
@@ -243,5 +240,22 @@ code {
 
 
 .teaser-img {
-    width: 300px !important;
+    width: 200px !important;
+}
+.row_container {
+	position:relative;
+	left:10%;
+	display: inline-block;
+	margin-top: 20px;
+	margin-bottom: 50px;
+  }
+  
+.topbar {
+background-color: white;
+position: relative;
+margin: 2%;
+z-index: 10;
+height: 0.1%;
+width: 110%;
+border-top: 1px solid rgb(44, 44, 44);
 }

@@ -31,28 +31,97 @@
     <p class="title">Seer: Language Instructed Video Prediction with Latent Diffusion Models</p>
     
     <p class="author">
-        <span class="author">Anonymous ICCV submission</span>
+        <span class="author">Xianfan Gu</a>&nbsp;<sup>1</sup></span>
+        <span class="author">Chuan Wen&nbsp;</a><sup>1,2,3</sup></span>
+        <span class="author">Jiaming Song&nbsp;<sup>4</sup></span>
+        <span class="author">Yang Gao</a>&nbsp;<sup>1,2,3</sup></span>
     </p>
-
+    <table border="0" align="center" class="affiliations" width="1200px">
+        <tbody align="center">
+            <tr>
+                <td style="text-align: center; width:20%; ">&nbsp;<sup>1</sup>&nbsp;Shanghai Qi Zhi Institute</td>
+                <td style="text-align: center; width:20%; ">&nbsp;<sup>2</sup>&nbsp;IIIS, Tsinghua University</td>
+                <td style="text-align: center; width:20%;">&nbsp;<sup>3</sup>&nbsp;Shanghai Artificial Intelligence Laboratory</td>
+                <td style="text-align: center; width:20%; ">&nbsp;<sup>4</sup>&nbsp;NVIDIA</td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" align="center" class="menu" style="margin-bottom: 8px;">
+        <tbody>
+            <tr>
+                <td align="center">| <a href="#paper">Arxiv Paper</a> | </td>
+            </tr>
+        </tbody>
+    </table>
     <div class="container">
         &nbsp;
 
         <p><span class="section"><b>Abstract</b></span> </p>
-        <p> The ABSTRACT is to be in fully-justified italicized text, at the top
-            of the left-hand column, below the author and affiliation
-            information. Use the word ``Abstract'' as the title, in 12-point
-            Times, boldface type, centered relative to the column, initially
-            capitalized. The abstract is to be in 10-point, single-spaced type.
-            Leave two blank lines after the Abstract, then begin the main text.
-            Look at previous ICCV abstracts to get a feel for style and length.
+        <p> Imagining the future trajectory is the key for robots to make sound planning and successfully reach their goals. Therefore, text-conditioned video prediction (TVP) is an essential task to facilitate general robot policy learning, i.e., predicting future video frames with a given language instruction and reference frames. It is a highly challenging task to ground task-level goals specified by instructions and high-fidelity frames together, requiring large-scale data and computation. To tackle this task and empower robots with the ability to foresee the future, we propose a sample and computation-efficient model, named <strong>Seer</strong>, by inflating the pretrained text-to-image (T2I) stable diffusion models along the temporal axis. We inflate the denoising U-Net and language conditioning model with two novel techniques, Autoregressive Spatial-Temporal Attention and Frame Sequential Text Decomposer, to propagate the rich prior knowledge in the pretrained T2I models across the frames. With the well-designed architecture, <strong>Seer</strong> makes it possible to generate high-fidelity, coherent, and instruction-aligned video frames by fine-tuning a few layers on a small amount of data. The experimental results on Something Something V2 (SSv2) and Bridgedata datasets demonstrate our superior video prediction performance with around 210-hour training on 4 RTX 3090 GPUs: decreasing the FVD of the current SOTA model from 290 to 200 on SSv2 and achieving at least 70% preference in the human evaluation.
         <p class="section">&nbsp;</p>
-        <p class="section"><b>GIF Results (Something-Something V2 Dataset)</b></p>
-        <table  width="1200" align="center">
+        <div class="topbar"></div>
+        <p class="section"><b>Text-conditioned Video Prediction/Manipulation 
+            <br>
+            <br>(Something-Something V2 Dataset)</b></p>
+        <table  width="1200" border="0" align="center">
+            <div class="row_container">
+                <div style="width:50%; float:left;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image10.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="move_pen_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image10_ours_1.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center; margin-bottom: 100px;">
+                        <div onclick="toggle_prompt('move_pen_up', ['move_pen_down'], 'move_pen_default')" class="caption caption-active" id="move_pen_up">"Moving pen up."</div>
+                        <br />
+                        <div onclick="toggle_prompt('move_pen_down', ['move_pen_up'], 'move_pen_default')" class="caption" id="move_pen_down">"Moving pen down."</div>
+                    </div>
+                </div>
+                <div style="width:50%; float:right;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image11.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="turn_fan_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image11_ours_1.GIF"/>
+                    </div>
+                    <div style="text-align:center; margin-bottom: 80px;">
+                        <div onclick="toggle_prompt('turn_fan_left', ['turn_fan_right'], 'turn_fan_default')" class="caption caption-active" id="turn_fan_left">"Turning the camera left while filming wall mounted fan."</div>
+                        <br />
+                        <div onclick="toggle_prompt('turn_fan_right', ['turn_fan_left'], 'turn_fan_default')" class="caption" id="turn_fan_right">"Turning the camera right while filming wall mounted fan."</div>
+                    </div>
+                </div>
+                <div style="width:50%; float:left;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image13.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="pick_juice_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image13_ours_2.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center;">
+                        <div onclick="toggle_prompt('pretend_pick_juice', ['pick_up_juice'], 'pick_juice_default')" class="caption caption-active" id="pretend_pick_juice">"Pretending to pick a box of juice up."</div>
+                        <br />
+                        <div onclick="toggle_prompt('pick_up_juice', ['pretend_pick_juice'], 'pick_juice_default')" class="caption" id="pick_up_juice">"Picking a box of juice up."</div>
+                    </div>
+                </div>
+                <div style="width:50%; float:right;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image12.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="move_scissor_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image12_ours_1.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center;">
+                        <div onclick="toggle_prompt('remove_scissor', ['pickup_scissor'], 'move_scissor_default')" class="caption caption-active" id="remove_scissor">"Pushing scissors so that it falls off the table."</div>
+                        <br />
+                        <div onclick="toggle_prompt('pickup_scissor', ['remove_scissor'], 'move_scissor_default')" class="caption" id="pickup_scissor">"Picking a scissors up."</div>
+                    </div>
+                </div>
+            </div>
             <tbody>
                 <tr>
                     <th style="font-size: 16px">Input frames</th>
-                    <th style="font-size: 16px">Ground Truth</th>
-                    <th style="font-size: 16px">"Pushing iphone adapter from left to right."</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">"Pushing iphone adapter from <br>left to right."</th>
                 </tr>
                 <tr>
                     <th><a href="./sm/assets/our_results/sthv2/ref_image1.png"> <a href="./sm/assets/our_results/sthv2/ref_image1.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image1.png" /> </a> </a></th>
@@ -65,8 +134,8 @@
             <tbody>
                 <tr>
                     <th style="font-size: 16px">Input frames</th>
-                    <th style="font-size: 16px">Ground Truth</th>
-                    <th style="font-size: 16px">"Covering salt shaker with a towel."</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">"Covering salt shaker with <br>a towel."</th>
                 </tr>
                 <tr>
                     <th><a href="./sm/assets/our_results/sthv2/ref_image2.png"> <a href="./sm/assets/our_results/sthv2/ref_image2.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image2.png" /> </a> </a></th>
@@ -79,13 +148,13 @@
             <tbody>
                 <tr>
                     <th style="font-size: 16px">Input frames</th>
-                    <th style="font-size: 16px">Ground Truth</th>
-                    <th style="font-size: 16px">"Covering salt shaker with a towel."</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">"Dropping a card in front of <br>a coin."</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image2.png"> <a href="./sm/assets/our_results/sthv2/ref_image2.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image2.png" /> </a> </a></th>
-                    <th><a href="./sm/assets/our_results/sthv2/image2.GIF"> <a href="./sm/assets/our_results/sthv2/image2.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image2.GIF" /> </a> </a></th>
-                    <th><a href="./sm/assets/our_results/sthv2/image2_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image2_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image2_ours.GIF"  class="center"/> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image3.png"> <a href="./sm/assets/our_results/sthv2/ref_image3.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image3.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image3.GIF"> <a href="./sm/assets/our_results/sthv2/image3.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image3.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image3_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image3_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image3_ours.GIF"/> </a> </a></th>
                 </tr>
 
                 <tr> <td><br /></td> </tr>
@@ -93,23 +162,183 @@
             <tbody>
                 <tr>
                     <th style="font-size: 16px">Input frames</th>
-                    <th style="font-size: 16px">Ground Truth</th>
-                    <th style="font-size: 16px">"Covering salt shaker with a towel."</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">"Folding mat."</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image2.png"> <a href="./sm/assets/our_results/sthv2/ref_image2.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image2.png" /> </a> </a></th>
-                    <th><a href="./sm/assets/our_results/sthv2/image2.GIF"> <a href="./sm/assets/our_results/sthv2/image2.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image2.GIF" /> </a> </a></th>
-                    <th><a href="./sm/assets/our_results/sthv2/image2_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image2_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image2_ours.GIF"  class="center"/> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image4.png"> <a href="./sm/assets/our_results/sthv2/ref_image4.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image4.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image4.GIF"> <a href="./sm/assets/our_results/sthv2/image4.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image4.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image4_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image4_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image4_ours.GIF"/> </a> </a></th>
+                </tr>
+
+                <tr> <td><br /></td> </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th style="font-size: 16px">Input frames</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">"Moving a bottle and a glass<br> away from each other."</th>
+                </tr>
+                <tr>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image8.png"> <a href="./sm/assets/our_results/sthv2/ref_image8.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image8.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image8.GIF"> <a href="./sm/assets/our_results/sthv2/image8.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image8.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image8_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image8_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image8_ours.GIF"/> </a> </a></th>
+                </tr>
+
+                <tr> <td><br /></td> </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th style="font-size: 16px">Input frames</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">"Tearing a piece of paper into<br> two pieces."</th>
+                </tr>
+                <tr>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image9.png"> <a href="./sm/assets/our_results/sthv2/ref_image9.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image9.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image9.GIF"> <a href="./sm/assets/our_results/sthv2/image9.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image9.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image9_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image9_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image9_ours.GIF"/> </a> </a></th>
+                </tr>
+
+                <tr> <td><br /></td> </tr>
+            </tbody>
+            
+        </table>
+        
+        <p class="section">&nbsp;</p>
+        <div class="topbar"></div>
+        <p class="section"><b>Text-conditioned Video Prediction/Manipulation (BridgeData)</b></p>
+        <table  width="1200" border="0" align="center">
+            <div class="row_container">
+                <div style="width:50%; float:left;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image14.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="put_plate_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image14_ours_1.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center; margin-bottom: 100px;">
+                        <div onclick="toggle_prompt('put_banana_plate', ['put_corn_plate'], 'put_plate_default')" class="caption caption-active" id="put_banana_plate">"Put banana on plate."</div>
+                        <br />
+                        <div onclick="toggle_prompt('put_corn_plate', ['put_banana_plate'], 'put_plate_default')" class="caption" id="put_corn_plate">"Put corn on plate."</div>
+                    </div>
+                </div>
+                <div style="width:50%; float:right;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image15.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="pick_up_cup" class="teaser-img" src="./sm/assets/our_results/sthv2/image15_ours_1.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center; margin-bottom: 100px;">
+                        <div onclick="toggle_prompt('pick_green_cup', ['pick_glass_cup'], 'pick_up_cup')" class="caption caption-active" id="pick_green_cup">"Pick up green mug."</div>
+                        <br />
+                        <div onclick="toggle_prompt('pick_glass_cup', ['pick_green_cup'], 'pick_up_cup')" class="caption" id="pick_glass_cup">"Pick up glass cup."</div>
+                    </div>
+                </div>
+                <div style="width:50%; float:left;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image16.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="turn_lever_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image16_ours_2.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center;">
+                        <div onclick="toggle_prompt('turn_lever_front', ['pick_up_knife'], 'turn_lever_default')" class="caption caption-active" id="turn_lever_front">"Turn lever vertical to front."</div>
+                        <br />
+                        <div onclick="toggle_prompt('pick_up_knife', ['turn_lever_front'], 'turn_lever_default')" class="caption" id="pick_up_knife">"Pick up knife from sink."</div>
+                    </div>
+                </div>
+                <div style="width:50%; float:right;">
+                    <div style="width:100%">
+                        <img width="224" src="./sm/assets/our_results/sthv2/ref_image17.png" />
+                        <span style="font-size: 100%;">→</span>
+                        <img width="224" id="pick_bowl_default" class="teaser-img" src="./sm/assets/our_results/sthv2/image17_ours_1.GIF"/>
+                    </div>
+                    <br />
+                    <div style="text-align:center;">
+                        <div onclick="toggle_prompt('pick_up_bowl', ['close_box_flap'], 'pick_bowl_default')" class="caption caption-active" id="pick_up_bowl">"Pick up bowl and put in small box."</div>
+                        <br />
+                        <div onclick="toggle_prompt('close_box_flap', ['pick_up_bowl'], 'pick_bowl_default')" class="caption" id="close_box_flap">"Close small box flap."</div>
+                    </div>
+                </div>
+                
+            </div>
+            <tbody>
+                <tr>
+                    <th style="font-size: 16px">Input frames</th>
+                    <th style="font-size: 16px">Text instruction</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">Synthesized Video</th>
+                </tr>
+                <tr>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image18.png"> <a href="./sm/assets/our_results/sthv2/ref_image18.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image18.png" /> </a> </a></th>
+                    <th style="font-size: 16px; font-family: Chalkduster;">"Flip pot upright in sink."</th>
+                    <th><a href="./sm/assets/our_results/sthv2/image18.GIF"> <a href="./sm/assets/our_results/sthv2/image18.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image18.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image18_ours_1.GIF"> <a href="./sm/assets/our_results/sthv2/image18_ours_1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image18_ours_1.GIF"/> </a> </a></th>
+                </tr>
+
+                <tr> <td><br /></td> </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th style="font-size: 16px">Input frames</th>
+                    <th style="font-size: 16px">Text instruction</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">Synthesized Video</th>
+                </tr>
+                <tr>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image19.png"> <a href="./sm/assets/our_results/sthv2/ref_image19.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image19.png" /> </a> </a></th>
+                    <th style="font-size: 16px; font-family: Chalkduster;">"Put pot on stove which <br />is near stove."</th>
+                    <th><a href="./sm/assets/our_results/sthv2/image19.GIF"> <a href="./sm/assets/our_results/sthv2/image19.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image19.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image19_ours_1.GIF"> <a href="./sm/assets/our_results/sthv2/image19_ours_1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image19_ours_1.GIF"/> </a> </a></th>
+                </tr>
+
+                <tr> <td><br /></td> </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th style="font-size: 16px">Input frames</th>
+                    <th style="font-size: 16px">Text instruction</th>
+                    <th style="font-size: 16px">Real Video</th>
+                    <th style="font-size: 16px">Synthesized Video</th>
+                </tr>
+                <tr>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image20.png"> <a href="./sm/assets/our_results/sthv2/ref_image20.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image20.png" /> </a> </a></th>
+                    <th style="font-size: 16px; font-family: Chalkduster;">"Flip pot upright in sink."</th>
+                    <th><a href="./sm/assets/our_results/sthv2/image20.GIF"> <a href="./sm/assets/our_results/sthv2/image20.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image20.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image20_ours_1.GIF"> <a href="./sm/assets/our_results/sthv2/image20_ours_1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image20_ours_1.GIF"/> </a> </a></th>
                 </tr>
 
                 <tr> <td><br /></td> </tr>
             </tbody>
         </table>
+    <p class="section">&nbsp;</p>
 
-        
+    <p class="section" id="bibtex"><b>Bibtex</b></p>
+    <table border="0" align="center">
+        <tbody>
+            <pre style=" display: block;
+                        background: #eee;
+                        white-space: pre;
+                        -webkit-overflow-scrolling: touch;
+                        max-width:  100%;
+                        min-width: 100px;
+                        border-radius: 20px;
+                        ">
+
+        @article{seer2023,
+            author  = {Xianfan, Gu and Chuan, Wen and Jiaming, Song and Yang, Gao},
+            title   = {Seer: Language Instructed Video Prediction with Latent Diffusion Models},
+            journal = {arXiv preprint arXiv:2211.12572},
+            year    = {2023},
+        }       
+          </pre>
+
+
+        </tbody>
+    </table>
+    Website template credit to <a href="https://github.com/pnp-diffusion/pnp-diffusion.github.io">Plug-and-Play Diffusion</a>.
     </div>
-
-
 
 </body>
 
