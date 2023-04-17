@@ -62,7 +62,7 @@
         <p class="section">&nbsp;</p>
         <p class="section"><b>Method</b></p>
         <p> Seer's pipeline includes an Inflated 3D U-Net for diffusion and a Frame Sequential Text Transformer (FSeq Text Transformer) for text conditioning. During training, all video frames are compressed to latent space with a pre-trained VAE encoder. Conditional latent vectors, sampled from reference video frames (ref.), are concatenated with noisy latent vectors along the frame axis to form the input latent. During inference, the conditional latent vectors are concatenated with Gaussian noise vectors, text conditioning is injected for each frame by FSeq Text Transformer (e.g., global instruction embedding “Moving remote and small remote away from each other.” is decomposed into 12 frames sub-instructions along the frame axis), and the denoised outputs are decoded to RGB video frames with the pre-trained VAE decoder.</p>
-        <video id="myVideo" width="100%" autoplay loop muted>
+        <video id="myVideo" width="100%" controls="controls" preload="true" autoplay loop muted>
             <source src="./sm/assets/our_results/sthv2/pipeline.mp4" type="video/mp4" />
             <source src="movie.ogg" type="video/ogg" />
             Your browser does not support the video tag.
