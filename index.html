@@ -28,6 +28,7 @@
 </head>
 
 <body>
+    <script src="./sm/assets/video.js"></script>
     <p class="title">Seer: Language Instructed Video Prediction with Latent Diffusion Models</p>
     
     <p class="author">
@@ -57,7 +58,15 @@
         &nbsp;
 
         <p><span class="section"><b>Abstract</b></span> </p>
-        <p> Imagining the future trajectory is the key for robots to make sound planning and successfully reach their goals. Therefore, text-conditioned video prediction (TVP) is an essential task to facilitate general robot policy learning, i.e., predicting future video frames with a given language instruction and reference frames. It is a highly challenging task to ground task-level goals specified by instructions and high-fidelity frames together, requiring large-scale data and computation. To tackle this task and empower robots with the ability to foresee the future, we propose a sample and computation-efficient model, named <strong>Seer</strong>, by inflating the pretrained text-to-image (T2I) stable diffusion models along the temporal axis. We inflate the denoising U-Net and language conditioning model with two novel techniques, Autoregressive Spatial-Temporal Attention and Frame Sequential Text Decomposer, to propagate the rich prior knowledge in the pretrained T2I models across the frames. With the well-designed architecture, <strong>Seer</strong> makes it possible to generate high-fidelity, coherent, and instruction-aligned video frames by fine-tuning a few layers on a small amount of data. The experimental results on Something Something V2 (SSv2) and Bridgedata datasets demonstrate our superior video prediction performance with around 210-hour training on 4 RTX 3090 GPUs: decreasing the FVD of the current SOTA model from 290 to 200 on SSv2 and achieving at least 70% preference in the human evaluation.
+        <p> Imagining the future trajectory is the key for robots to make sound planning and successfully reach their goals. Therefore, text-conditioned video prediction (TVP) is an essential task to facilitate general robot policy learning, i.e., predicting future video frames with a given language instruction and reference frames. It is a highly challenging task to ground task-level goals specified by instructions and high-fidelity frames together, requiring large-scale data and computation. To tackle this task and empower robots with the ability to foresee the future, we propose a sample and computation-efficient model, named <strong>Seer</strong>, by inflating the pretrained text-to-image (T2I) stable diffusion models along the temporal axis. We inflate the denoising U-Net and language conditioning model with two novel techniques, Autoregressive Spatial-Temporal Attention and Frame Sequential Text Decomposer, to propagate the rich prior knowledge in the pretrained T2I models across the frames. With the well-designed architecture, <strong>Seer</strong> makes it possible to generate high-fidelity, coherent, and instruction-aligned video frames by fine-tuning a few layers on a small amount of data. The experimental results on Something Something V2 (SSv2) and Bridgedata datasets demonstrate our superior video prediction performance with around 210-hour training on 4 RTX 3090 GPUs: decreasing the FVD of the current SOTA model from 290 to 200 on SSv2 and achieving at least 70% preference in the human evaluation. </p>
+        <p class="section">&nbsp;</p>
+        <p class="section"><b>Method</b></p>
+        <p> Seer's pipeline includes an Inflated 3D U-Net for diffusion and a Frame Sequential Text Transformer (FSeq Text Transformer) for text conditioning. During training, all video frames are compressed to latent space with a pre-trained VAE encoder. Conditional latent vectors, sampled from reference video frames (ref.), are concatenated with noisy latent vectors along the frame axis to form the input latent. During inference, the conditional latent vectors are concatenated with Gaussian noise vectors, text conditioning is injected for each frame by FSeq Text Transformer (e.g., global instruction embedding “Moving remote and small remote away from each other.” is decomposed into 12 frames sub-instructions along the frame axis), and the denoised outputs are decoded to RGB video frames with the pre-trained VAE decoder.</p>
+        <video id="myVideo" width="100%" autoplay loop muted>
+            <source src="./sm/assets/our_results/sthv2/pipeline.mp4" type="video/mp4" />
+            <source src="movie.ogg" type="video/ogg" />
+            Your browser does not support the video tag.
+        </video>
         <p class="section">&nbsp;</p>
         <div class="topbar"></div>
         <p class="section"><b>Text-conditioned Video Prediction/Manipulation 
@@ -363,7 +372,7 @@
 
       });
  </script>
-
+    
  <script>
     function prompt_on(prompt_element) {
         prompt_element.classList.add("caption-active");
