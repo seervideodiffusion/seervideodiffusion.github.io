@@ -3,11 +3,25 @@
 <!-- saved from url=(0045)http://6.869.csail.mit.edu/fa19/schedule.html -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <link href="https://fonts.cdnfonts.com/css/chalkduster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+<link rel="stylesheet" href="./sm/assets/css/bulma.min.css">
+<link rel="stylesheet" href="./sm/assets/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="./sm/assets/css/bulma-slider.min.css">
+<link rel="stylesheet" href="./sm/assets/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="./sm/assets/css/index.css">
 <style>
     @import url('https://fonts.cdnfonts.com/css/chalkduster');
 </style>
 <script src="./sm/assets/teaser-data.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="./sm/assets/js/fontawesome.all.min.js"></script>
+<script src="./sm/assets/js/bulma-carousel.min.js"></script>
+<script src="./sm/assets/js/bulma-slider.min.js"></script>
+<script src="./sm/assets/js/index.js"></script>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,19 +61,34 @@
             </tr>
         </tbody>
     </table>
-    <table border="0" align="center" class="menu" style="margin-bottom: 8px;">
-        <tbody>
-            <tr>
-                <td align="center">| <a href=https://arxiv.org/abs/2303.14897>Arxiv 2023 Paper</a> | </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2303.14897.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2303.14897"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+    </div>
     <div class="container">
         &nbsp;
 
         <p><span class="section"><b>Abstract</b></span> </p>
         <p> Imagining the future trajectory is the key for robots to make sound planning and successfully reach their goals. Therefore, text-conditioned video prediction (TVP) is an essential task to facilitate general robot policy learning, i.e., predicting future video frames with a given language instruction and reference frames. It is a highly challenging task to ground task-level goals specified by instructions and high-fidelity frames together, requiring large-scale data and computation. To tackle this task and empower robots with the ability to foresee the future, we propose a sample and computation-efficient model, named <strong>Seer</strong>, by inflating the pretrained text-to-image (T2I) stable diffusion models along the temporal axis. We inflate the denoising U-Net and language conditioning model with two novel techniques, Autoregressive Spatial-Temporal Attention and Frame Sequential Text Decomposer, to propagate the rich prior knowledge in the pretrained T2I models across the frames. With the well-designed architecture, <strong>Seer</strong> makes it possible to generate high-fidelity, coherent, and instruction-aligned video frames by fine-tuning a few layers on a small amount of data. The experimental results on Something Something V2 (SSv2) and Bridgedata datasets demonstrate our superior video prediction performance with around 210-hour training on 4 RTX 3090 GPUs: decreasing the FVD of the current SOTA model from 290 to 200 on SSv2 and achieving at least 70% preference in the human evaluation. </p>
-        <p class="section">&nbsp;</p>
         <p class="section"><b>Method</b></p>
         <p> Seer's pipeline includes an Inflated 3D U-Net for diffusion and a Frame Sequential Text Transformer (FSeq Text Transformer) for text conditioning. During training, all video frames are compressed to latent space with a pre-trained VAE encoder. Conditional latent vectors, sampled from reference video frames (ref.), are concatenated with noisy latent vectors along the frame axis to form the input latent. During inference, the conditional latent vectors are concatenated with Gaussian noise vectors, text conditioning is injected for each frame by FSeq Text Transformer (e.g., global instruction embedding “Moving remote and small remote away from each other.” is decomposed into 12 frames sub-instructions along the frame axis), and the denoised outputs are decoded to RGB video frames with the pre-trained VAE decoder.</p>
         <video id="myVideo" width="100%" controls="controls" preload="true" autoplay loop muted>
