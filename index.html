@@ -42,14 +42,17 @@
 </head>
 
 <body>
-    <script src="./sm/assets/video.js"></script>
-    <p class="title">Seer: Language Instructed Video Prediction with Latent Diffusion Models.</p>
-    
+    <p class="title">Seer: Language Instructed Video Prediction with Latent Diffusion Models</p>
+    <div style="text-align: center; font-size: 20pt; margin-bottom: 15px">
+        <span>ICLR 2024</span>
+    </div>
+    <br />
     <p class="author">
-        <span class="author">Xianfan Gu</a>&nbsp;<sup>1</sup></span>
-        <span class="author">Chuan Wen&nbsp;</a><sup>1,2,3</sup></span>
-        <span class="author">Jiaming Song&nbsp;<sup>4</sup></span>
-        <span class="author">Yang Gao</a>&nbsp;<sup>1,2,3</sup></span>
+        <span class="author"><a target="_blank" href="https://xianfangu.github.io/">Xianfan Gu</a>&nbsp;<sup>1</sup></span>
+        <span class="author"><a target="_blank" href="https://alvinwen428.github.io/">Chuan Wen&nbsp;</a><sup>1,2,3</sup></span>
+        <span class="author"><a target="_blank" href="https://yewr.github.io/">Weirui Ye&nbsp;</a><sup>1,2,3</sup></span>
+        <span class="author"><a target="_blank" href="https://tsong.me/">Jiaming Song&nbsp;</a><sup>4</sup></span>
+        <span class="author"><a target="_blank" href="https://people.iiis.tsinghua.edu.cn/~gaoyang/yang-gao.weebly.com/index.html">Yang Gao </a><sup>1,2,3</sup></span>
     </p>
     <table border="0" align="center" class="affiliations" width="1200px">
         <tbody align="center">
@@ -82,6 +85,15 @@
                   <span>arXiv</span>
                 </a>
               </span>
+              <span class="link-block">
+                <a target="_blank" href="https://seervideodiffusion.github.io/"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code (Coming Soon)</span>
+                </a>
+            </span>
             </div>
     </div>
     <div class="container">
@@ -89,18 +101,23 @@
 
         <p><span class="section"><b>Abstract</b></span> </p>
         <p> Imagining the future trajectory is the key for robots to make sound planning and successfully reach their goals. Therefore, text-conditioned video prediction (TVP) is an essential task to facilitate general robot policy learning, i.e., predicting future video frames with a given language instruction and reference frames. It is a highly challenging task to ground task-level goals specified by instructions and high-fidelity frames together, requiring large-scale data and computation. To tackle this task and empower robots with the ability to foresee the future, we propose a sample and computation-efficient model, named <strong>Seer</strong>, by inflating the pretrained text-to-image (T2I) stable diffusion models along the temporal axis. We inflate the denoising U-Net and language conditioning model with two novel techniques, Autoregressive Spatial-Temporal Attention and Frame Sequential Text Decomposer, to propagate the rich prior knowledge in the pretrained T2I models across the frames. With the well-designed architecture, <strong>Seer</strong> makes it possible to generate high-fidelity, coherent, and instruction-aligned video frames by fine-tuning a few layers on a small amount of data. The experimental results on Something Something V2 (SSv2) and Bridgedata datasets demonstrate our superior video prediction performance with around 210-hour training on 4 RTX 3090 GPUs: decreasing the FVD of the current SOTA model from 290 to 200 on SSv2 and achieving at least 70% preference in the human evaluation. </p>
-        <p class="section"><b>Method</b></p>
+        <br />
+        <br />
+        <p><span class="section"><b>Method</b></span> </p>
         <p> Seer's pipeline includes an Inflated 3D U-Net for diffusion and a Frame Sequential Text Transformer (FSeq Text Transformer) for text conditioning. During training, all video frames are compressed to latent space with a pre-trained VAE encoder. Conditional latent vectors, sampled from reference video frames (ref.), are concatenated with noisy latent vectors along the frame axis to form the input latent. During inference, the conditional latent vectors are concatenated with Gaussian noise vectors, text conditioning is injected for each frame by FSeq Text Transformer (e.g., global instruction embedding “Moving remote and small remote away from each other.” is decomposed into 12 frames sub-instructions along the frame axis), and the denoised outputs are decoded to RGB video frames with the pre-trained VAE decoder.</p>
-        <video id="myVideo" width="100%" controls="controls" preload="true" autoplay loop muted>
-            <source src="./sm/assets/our_results/sthv2/pipeline.mp4" type="video/mp4" />
-            <source src="movie.ogg" type="video/ogg" />
-            Your browser does not support the video tag.
-        </video>
-        <p class="section">&nbsp;</p>
+        <img id="pipeline" width="100%" src="./sm/assets/our_results/sthv2/pipeline.png" />
+        <br />
+        <br />
         <div class="topbar"></div>
-        <p class="section"><b>Text-conditioned Video Prediction/Manipulation 
-            <br>
-            <br>(Something-Something V2 Dataset)</b></p>
+        <p><span class="section"><b>Results</b></span> </p>
+        <img id="results_demo" width="100%" src="./sm/assets/our_results/sthv2/seer_results.png" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p><span class="section"><b>Text-conditioned Video Prediction/Manipulation</b></span></p>
+        <br>
+        <p><span class="section"><b>(Something-Something V2 Dataset)</b></span></p>
         <table  width="1200" border="0" align="center">
             <div class="row_container">
                 <div style="width:50%; float:left;">
@@ -155,6 +172,8 @@
                     </div>
                 </div>
             </div>
+
+
             <tbody>
                 <tr>
                     <th style="font-size: 16px">Input frames</th>
@@ -163,10 +182,10 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image1.png"> <a href="./sm/assets/our_results/sthv2/ref_image1.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image1.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image1.png"> <a href="./sm/assets/our_results/sthv2/ref_image1.png"> <img width="448" src="./sm/assets/our_results/sthv2/ref_image1.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Pushing iphone<br> adapter from<br> left to right."</th>
-                    <th><a href="./sm/assets/our_results/sthv2/image1.GIF"> <a href="./sm/assets/our_results/sthv2/image1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image1.GIF" /> </a> </a></th>
-                    <th><a href="./sm/assets/our_results/sthv2/image1_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image1_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image1_ours.GIF"/> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image1.GIF"> <a href="./sm/assets/our_results/sthv2/image1.GIF"> <img width="224" src="./sm/assets/our_results/sthv2/image1.GIF" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/image1_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image1_ours.GIF"> <img width="224" src="./sm/assets/our_results/sthv2/image1_ours.GIF"/> </a> </a></th>
                 </tr>
 
                 <tr> <td><br /></td> </tr>
@@ -179,7 +198,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image2.png"> <a href="./sm/assets/our_results/sthv2/ref_image2.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image2.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image2.png"> <a href="./sm/assets/our_results/sthv2/ref_image2.png"> <img width="448" src="./sm/assets/our_results/sthv2/ref_image2.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Covering salt<br> shaker with<br> a towel."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image2.GIF"> <a href="./sm/assets/our_results/sthv2/image2.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image2.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image2_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image2_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image2_ours.GIF"/> </a> </a></th>
@@ -195,7 +214,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image3.png"> <a href="./sm/assets/our_results/sthv2/ref_image3.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image3.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image3.png"> <a href="./sm/assets/our_results/sthv2/ref_image3.png"> <img width="448" src="./sm/assets/our_results/sthv2/ref_image3.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Dropping a<br> card in front of<br> a coin."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image3.GIF"> <a href="./sm/assets/our_results/sthv2/image3.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image3.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image3_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image3_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image3_ours.GIF"/> </a> </a></th>
@@ -211,7 +230,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image4.png"> <a href="./sm/assets/our_results/sthv2/ref_image4.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image4.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image4.png"> <a href="./sm/assets/our_results/sthv2/ref_image4.png"> <img width="448" src="./sm/assets/our_results/sthv2/ref_image4.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Folding mat."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image4.GIF"> <a href="./sm/assets/our_results/sthv2/image4.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image4.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image4_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image4_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image4_ours.GIF"/> </a> </a></th>
@@ -227,7 +246,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image8.png"> <a href="./sm/assets/our_results/sthv2/ref_image8.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image8.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image8.png"> <a href="./sm/assets/our_results/sthv2/ref_image8.png"> <img width="448" src="./sm/assets/our_results/sthv2/ref_image8.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Moving a bottle<br> and a glass away<br> from each other."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image8.GIF"> <a href="./sm/assets/our_results/sthv2/image8.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image8.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image8_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image8_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image8_ours.GIF"/> </a> </a></th>
@@ -243,7 +262,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image9.png"> <a href="./sm/assets/our_results/sthv2/ref_image9.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image9.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image9.png"> <a href="./sm/assets/our_results/sthv2/ref_image9.png"> <img width="448" src="./sm/assets/our_results/sthv2/ref_image9.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Tearing a piece<br> of paper into<br> two pieces."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image9.GIF"> <a href="./sm/assets/our_results/sthv2/image9.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image9.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image9_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image9_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image9_ours.GIF"/> </a> </a></th>
@@ -253,10 +272,9 @@
             </tbody>
             
         </table>
-        
-        <p class="section">&nbsp;</p>
+
         <div class="topbar"></div>
-        <p class="section"><b>Text-conditioned Video Prediction/Manipulation (BridgeData)</b></p>
+        <p><span class="section"><b>Text-conditioned Video Prediction/Manipulation (BridgeData)</b></span></p>
         <table  width="1200" border="0" align="center">
             <div class="row_container">
                 <div style="width:50%; float:left;">
@@ -321,7 +339,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image18.png"> <a href="./sm/assets/our_results/sthv2/ref_image18.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image18.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image18.png"> <a href="./sm/assets/our_results/sthv2/ref_image18.png"> <img width="224" src="./sm/assets/our_results/sthv2/ref_image18.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Flip pot upright in sink."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image18.GIF"> <a href="./sm/assets/our_results/sthv2/image18.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image18.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image18_ours_1.GIF"> <a href="./sm/assets/our_results/sthv2/image18_ours_1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image18_ours_1.GIF"/> </a> </a></th>
@@ -337,7 +355,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image19.png"> <a href="./sm/assets/our_results/sthv2/ref_image19.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image19.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image19.png"> <a href="./sm/assets/our_results/sthv2/ref_image19.png"> <img width="224" src="./sm/assets/our_results/sthv2/ref_image19.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Put pot on stove which <br />is near stove."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image19.GIF"> <a href="./sm/assets/our_results/sthv2/image19.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image19.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image19_ours_1.GIF"> <a href="./sm/assets/our_results/sthv2/image19_ours_1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image19_ours_1.GIF"/> </a> </a></th>
@@ -353,7 +371,7 @@
                     <th style="font-size: 16px">Synthesized Video</th>
                 </tr>
                 <tr>
-                    <th><a href="./sm/assets/our_results/sthv2/ref_image20.png"> <a href="./sm/assets/our_results/sthv2/ref_image20.png"> <img  height="224" src="./sm/assets/our_results/sthv2/ref_image20.png" /> </a> </a></th>
+                    <th><a href="./sm/assets/our_results/sthv2/ref_image20.png"> <a href="./sm/assets/our_results/sthv2/ref_image20.png"> <img width="224" src="./sm/assets/our_results/sthv2/ref_image20.png" /> </a> </a></th>
                     <th style="font-size: 16px; font-family: Chalkduster;">"Flip pot upright in sink."</th>
                     <th><a href="./sm/assets/our_results/sthv2/image20.GIF"> <a href="./sm/assets/our_results/sthv2/image20.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image20.GIF" /> </a> </a></th>
                     <th><a href="./sm/assets/our_results/sthv2/image20_ours_1.GIF"> <a href="./sm/assets/our_results/sthv2/image20_ours_1.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image20_ours_1.GIF"/> </a> </a></th>
@@ -362,9 +380,66 @@
                 <tr> <td><br /></td> </tr>
             </tbody>
         </table>
-    <p class="section">&nbsp;</p>
+        <div class="topbar"></div>
+        <p><span class="section"><b>Text-conditioned Video Prediction (Epic-Kitchens)</b></span></p>
+        <table  width="1200" border="0" align="center">
 
-    <p class="section" id="bibtex"><b>Bibtex</b></p>
+            <tbody>
+            <tr>
+                <th style="font-size: 16px">Input frames</th>
+                <th style="font-size: 16px">Text instruction</th>
+                <th style="font-size: 16px">Real Video</th>
+                <th style="font-size: 16px">Synthesized Video</th>
+            </tr>
+            <tr>
+                <th><a href="./sm/assets/our_results/sthv2/ref_image25.png"> <a href="./sm/assets/our_results/sthv2/ref_image25.png"> <img width="224" src="./sm/assets/our_results/sthv2/ref_image25.png" /> </a> </a></th>
+                <th style="font-size: 16px; font-family: Chalkduster;">"Open cupboard"</th>
+                <th><a href="./sm/assets/our_results/sthv2/image25.GIF"> <a href="./sm/assets/our_results/sthv2/image25.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image25.GIF" /> </a> </a></th>
+                <th><a href="./sm/assets/our_results/sthv2/image25_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image25_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image25_ours.GIF"/> </a> </a></th>
+            </tr>
+
+            <tr> <td><br /></td> </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th style="font-size: 16px">Input frames</th>
+                <th style="font-size: 16px">Text instruction</th>
+                <th style="font-size: 16px">Real Video</th>
+                <th style="font-size: 16px">Synthesized Video</th>
+            </tr>
+            <tr>
+                <th><a href="./sm/assets/our_results/sthv2/ref_image26.png"> <a href="./sm/assets/our_results/sthv2/ref_image26.png"> <img width="224" src="./sm/assets/our_results/sthv2/ref_image26.png" /> </a> </a></th>
+                <th style="font-size: 16px; font-family: Chalkduster;">"Wiping bowl with rag"</th>
+                <th><a href="./sm/assets/our_results/sthv2/image26.GIF"> <a href="./sm/assets/our_results/sthv2/image26.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image26.GIF" /> </a> </a></th>
+                <th><a href="./sm/assets/our_results/sthv2/image26_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image26_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image26_ours.GIF"/> </a> </a></th>
+            </tr>
+
+            <tr> <td><br /></td> </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th style="font-size: 16px">Input frames</th>
+                <th style="font-size: 16px">Text instruction</th>
+                <th style="font-size: 16px">Real Video</th>
+                <th style="font-size: 16px">Synthesized Video</th>
+            </tr>
+            <tr>
+                <th><a href="./sm/assets/our_results/sthv2/ref_image27.png"> <a href="./sm/assets/our_results/sthv2/ref_image27.png"> <img width="224" src="./sm/assets/our_results/sthv2/ref_image27.png" /> </a> </a></th>
+                <th style="font-size: 16px; font-family: Chalkduster;">"Chopping onion"</th>
+                <th><a href="./sm/assets/our_results/sthv2/image27.GIF"> <a href="./sm/assets/our_results/sthv2/image27.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image27.GIF" /> </a> </a></th>
+                <th><a href="./sm/assets/our_results/sthv2/image27_ours.GIF"> <a href="./sm/assets/our_results/sthv2/image27_ours.GIF"> <img  width="224" src="./sm/assets/our_results/sthv2/image27_ours.GIF"/> </a> </a></th>
+            </tr>
+
+            <tr> <td><br /></td> </tr>
+            </tbody>
+        </table>
+
+        <div class="topbar"></div>
+        <img  width="150%" src="./sm/assets/our_results/sthv2/zero_shot_demo_1.gif" />
+        <img  width="100%" src="./sm/assets/our_results/sthv2/zero_shot_demo_2.gif" />
+        <br />
+        <br />
+    <p><span class="section" id="bibtex"><b>Bibtex</b></span></p>
     <table border="0" align="center">
         <tbody>
             <pre style=" display: block;
@@ -376,7 +451,7 @@
                         border-radius: 20px;
                         ">
         @article{gu2023seer,
-            author  = {Gu, Xianfan and Wen, Chuan and Song, Jiaming and Gao, Yang},
+            author  = {Gu, Xianfan and Wen, Chuan and Ye, Weirui and Song, Jiaming and Gao, Yang},
             title   = {Seer: Language Instructed Video Prediction with Latent Diffusion Models},
             journal = {arXiv preprint arXiv:2303.14897},
             year    = {2023},
